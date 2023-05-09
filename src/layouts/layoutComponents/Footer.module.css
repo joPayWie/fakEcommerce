@@ -1,0 +1,44 @@
+@font-face {
+  font-family: remachine;
+  src: url('../../assets/fonts/RemachineScript_Personal_Use.ttf');
+}
+
+footer strong {
+  font-family: remachine;
+}
+
+.main_footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 20vh;
+  background-color: #6482f3;
+  color: #343434;
+  font-synthesis: none;
+}
+
+.container_footer {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10%;
+}
+
+.icons_footer {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.copyright {
+  font-size: 0.75rem;
+}
+
+.signature {
+  font-weight: 600;
+  font-size: 0.82rem;
+}
