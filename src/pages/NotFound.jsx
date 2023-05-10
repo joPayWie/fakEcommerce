@@ -9,7 +9,7 @@ export const NotFound = () => {
       align="center"
       justify="center"
       flex="1"
-      bgColor="#f6f7fe"
+      bgColor="#dadefb"
     >
       <Heading>404</Heading>
       <Text>Sorry, this page isn't available</Text>

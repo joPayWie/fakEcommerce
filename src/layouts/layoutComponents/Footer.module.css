@@ -12,7 +12,7 @@ footer strong {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 20vh;
+  height: 25vh;
   background-color: #6482f3;
   color: #343434;
   font-synthesis: none;
@@ -20,12 +20,12 @@ footer strong {
 
 .container_footer {
   height: 100%;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 10%;
+  margin-top: 10px;
 }
 
 .icons_footer {
@@ -34,11 +34,20 @@ footer strong {
   gap: 20px;
 }
 
+.footer_i:hover {
+  color: white;
+}
+
 .copyright {
   font-size: 0.75rem;
 }
 
 .signature {
   font-weight: 600;
-  font-size: 0.82rem;
+  font-size: 0.75rem;
+}
+
+.jopay {
+  color: white;
+  font-size: 3rem;
 }

@@ -33,7 +33,7 @@ export const ProductCard = ({ product }) => {
         <Stack mt="6" spacing="3">
           <Heading size="md">{name}</Heading>
           <Text>{description}</Text>
-          <Text color="green.600" fontSize="2xl" fontWeight="bold">
+          <Text color="gray.600" fontSize="2xl" fontWeight="bold">
             ${price}
           </Text>
         </Stack>

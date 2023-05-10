@@ -8,19 +8,19 @@ export const Footer = () => {
       <div className={styles.container_footer}>
         <div className={styles.icons_footer}>
           <a href="https://twitter.com/" target="_blank" rel="noreferrer">
-            <BsTwitter size={30} />
+            <BsTwitter className={styles.footer_i} size={30} />
           </a>
           <a href="https://m.facebook.com/" target="_blank" rel="noreferrer">
-            <BsFacebook size={30} />
+            <BsFacebook className={styles.footer_i} size={30} />
           </a>
           <a href="https://www.instagram.com/" target="_blank" rel="noreferrer">
-            <BsInstagram size={30} />
+            <BsInstagram className={styles.footer_i} size={30} />
           </a>
         </div>
         <span className={styles.copyright}>RAINBOW - fakEcommerce - 2023®</span>
         <span className={styles.signature}>
           Build with &#128154; by
-          <strong className="text-white text-3xl"> JoPay</strong>
+          <strong className="text-white text-2xl"> JoPay</strong>
         </span>
       </div>
     </footer>

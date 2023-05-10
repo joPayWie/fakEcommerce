@@ -17,10 +17,10 @@ import {
 
 import { IoCart } from 'react-icons/io5'
 
-import { useParams } from 'react-router-dom'
+// import { useParams } from 'react-router-dom'
 
 export const ProductDetails = () => {
-  const param = useParams()
+  // const param = useParams()
 
   // si fuera una API habría que armar una petición, guardarlo en un estado, etc.
 

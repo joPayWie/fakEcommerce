@@ -13,7 +13,7 @@ export const Nav = () => {
         alt="Logo"
         style={{ maxHeight: '100%', marginLeft: '1rem' }}
       />
-      <HStack as="nav" gap="5%" fontWeight="medium" px="4rem" mr="1rem">
+      <HStack as="nav" gap="5%" fontWeight="semibold" px="4rem" mr="1rem">
         <Link
           as={NavLink}
           to="/"

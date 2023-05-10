@@ -4,9 +4,12 @@ import { Route } from 'react-router-dom'
 import { MainLayout } from './layouts/MainLayout'
 import { Home } from './pages/Home'
 import { Products } from './pages/Products'
-import { Login } from './pages/Login'
-import { NotFound } from './pages/NotFound'
 import { ProductDetails } from './pages/ProductDetails'
+
+import { Login } from './pages/auth/Login'
+import { Register } from './pages/auth/Register'
+
+import { NotFound } from './pages/NotFound'
 
 import './index.css'
 
