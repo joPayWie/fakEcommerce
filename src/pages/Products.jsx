@@ -8,6 +8,8 @@ import { getProducts } from '../services/products'
 export const Products = () => {
   // useEffect(() => const getData = async () => { await getProducts() },[])
 
+  const addToCart = () => {}
+
   return (
     <SimpleGrid
       columns={{ base: '1', md: '3', xl: '4' }}

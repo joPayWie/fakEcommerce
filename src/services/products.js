@@ -2,7 +2,7 @@ import { collection, getDocs } from 'firebase/firestore'
 import { DB } from '../firebase/config'
 
 export const getProducts = async () => {
-  const productsData = await getDocs(collection(DB, 'users'))
+  const productsData = await getDocs(collection(DB, 'products'))
 
   let products = []
 

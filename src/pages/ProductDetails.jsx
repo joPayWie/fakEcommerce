@@ -24,6 +24,8 @@ export const ProductDetails = () => {
 
   // si fuera una API habría que armar una petición, guardarlo en un estado, etc.
 
+  // acá puedo usar un useMemo para guardar el producto que me traiga la database
+
   return (
     <Container maxW={'7xl'}>
       <SimpleGrid

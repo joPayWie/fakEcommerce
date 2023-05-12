@@ -20,7 +20,7 @@ export const Footer = () => {
         <span className={styles.copyright}>RAINBOW - fakEcommerce - 2023®</span>
         <span className={styles.signature}>
           Build with &#128154; by
-          <strong className="text-white text-2xl"> JoPay</strong>
+          <strong className={styles.jopay}> JoPay</strong>
         </span>
       </div>
     </footer>

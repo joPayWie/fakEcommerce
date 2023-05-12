@@ -1,5 +1,7 @@
 import { Flex, Heading, Text } from '@chakra-ui/react'
 
+import bgImg from '../assets/bg2.jpg'
+
 export const Home = () => {
   return (
     <Flex
@@ -9,7 +11,8 @@ export const Home = () => {
       align="center"
       justify="center"
       flex="1"
-      bgColor="#f6f7fe"
+      bgImage={bgImg}
+      bgSize="cover"
     >
       <Heading>Home</Heading>
       <Text>This is our HomePage</Text>

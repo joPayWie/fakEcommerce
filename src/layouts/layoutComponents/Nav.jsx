@@ -1,6 +1,8 @@
-import { HStack, Link } from '@chakra-ui/react'
+import { Flex, HStack, Link, Button } from '@chakra-ui/react'
 
 import { NavLink } from 'react-router-dom'
+
+import { IoCart } from 'react-icons/io5'
 
 import logo from '../../../src/assets/logo.png'
 import styles from './Nav.module.css'
@@ -56,20 +58,20 @@ export const Nav = () => {
         >
           LOGIN
         </Link>
-        <Link
-          as={NavLink}
-          to="/register"
+        <Flex
+          as={Button}
           color="#00cb7f"
           rounded="md"
-          px=".5rem"
+          p=".5rem"
+          bgColor="transparent"
           _hover={{
             textDecoration: 'none',
             bgColor: '#00cb7f',
             color: 'white',
           }}
         >
-          REGISTER
-        </Link>
+          <IoCart size={30} />
+        </Flex>
       </HStack>
     </nav>
   )
