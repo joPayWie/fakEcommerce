@@ -1,3 +1,5 @@
+import { useContext } from 'react'
+
 import {
   Box,
   Container,
@@ -7,6 +9,7 @@ import {
   Flex,
   VStack,
   Button,
+  IconButton,
   Heading,
   SimpleGrid,
   StackDivider,
@@ -16,15 +19,34 @@ import {
 } from '@chakra-ui/react'
 
 import { IoCart } from 'react-icons/io5'
+import { AiOutlineArrowLeft } from 'react-icons/ai'
+
+import { CartContext } from '../context/CartContext'
+import { products } from '../data/products'
 
 // import { useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 export const ProductDetails = () => {
   // const param = useParams()
+  // esto es para usar el valor del param (id del producto en este caso) y poder encontrar el producto específico
 
-  // si fuera una API habría que armar una petición, guardarlo en un estado, etc.
-
+  // const product = buscar producto en la database
   // acá puedo usar un useMemo para guardar el producto que me traiga la database
+
+  const navigate = useNavigate()
+  // la función navigate debemos usarla dentro de la función de agregar al carrito
+  // permite que nos movamos en rutas dependiendo de lo que el user va haciendo
+  // EN MI APP ESTO VA A IR EN EL BOTÓN DEL DRAWER
+
+  // const { addProduct} = useContext(CartContext)
+  // const addProductToCart = (product) => {
+  //     addProduct([... cart, product])
+  // navigate("/cart")
+  // }
+
+  // esta función navigate también te permite ir a la ruta previa en la que estabas
+  // esto se hace ejecutando el navigate(-1)
 
   return (
     <Container maxW={'7xl'}>
@@ -46,8 +68,13 @@ export const ProductDetails = () => {
             h={{ base: '100%', sm: '400px', lg: '500px' }}
           />
         </Flex>
-        <Stack className="tuvieja" spacing={{ base: 6, md: 10 }}>
+        <Stack spacing={{ base: 6, md: 10 }}>
           <Box as={'header'}>
+            <IconButton
+              onClick={() => navigate(-1)}
+              colorScheme="blue"
+              icon={<AiOutlineArrowLeft size={25} />}
+            />
             <Heading
               lineHeight={1.1}
               fontWeight={600}
@@ -124,6 +151,7 @@ export const ProductDetails = () => {
                 transform: 'translateY(2px)',
                 boxShadow: 'lg',
               }}
+              // onClick={addProductToCart(product)}
             >
               <span style={{ marginRight: '10px' }}>Add to cart</span>
               <IoCart size={25} />

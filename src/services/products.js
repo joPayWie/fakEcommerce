@@ -1,4 +1,4 @@
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, getDocs, doc, getDoc } from 'firebase/firestore'
 import { DB } from '../firebase/config'
 
 export const getProducts = async () => {
@@ -7,10 +7,19 @@ export const getProducts = async () => {
   let products = []
 
   productsData.forEach((doc) => {
-    console.log(`${doc.id} => ${doc.data()}`)
     products.push({
       ...doc.data(),
       id: doc.id,
     })
   })
+  return products
+}
+
+export const getOneProduct = async (id) => {
+  const ref = doc(DB, 'products', id)
+  const productSnap = await getDoc(ref)
+  if (productSnap.exists()) {
+    const product = productSnap.data()
+    return product
+  }
 }

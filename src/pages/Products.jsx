@@ -1,14 +1,23 @@
+import { useEffect, useState } from 'react'
+
 import { SimpleGrid } from '@chakra-ui/react'
 
 import { ProductCard } from '../components/ProductCard'
 
-import { products } from '../data/products'
 import { getProducts } from '../services/products'
 
 export const Products = () => {
-  // useEffect(() => const getData = async () => { await getProducts() },[])
+  const [products, setProducts] = useState([])
 
-  const addToCart = () => {}
+  useEffect(() => {
+    const getData = async () => {
+      const products = await getProducts()
+      setProducts(products)
+    }
+    getData()
+  }, [])
+
+  // const addToCart = () => {}
 
   return (
     <SimpleGrid
