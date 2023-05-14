@@ -15,7 +15,6 @@ import {
   Heading,
   SimpleGrid,
   StackDivider,
-  useColorModeValue,
   List,
   ListItem,
 } from '@chakra-ui/react'

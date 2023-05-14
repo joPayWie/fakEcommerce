@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+import { Flex } from '@chakra-ui/react'
+
 import { auth } from '../../firebase/config'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 
@@ -31,14 +33,16 @@ export const Login = () => {
     }
   }
   return (
-    <form onSubmit={onSubmit}>
-      <div>
-        <input type="email" name="userEmail" />
-      </div>
-      <div>
-        <input type="password" name="userPassword" />
-      </div>
-      <button type="submit">Login</button>
-    </form>
+    <Flex bgColor="white">
+      <form onSubmit={onSubmit}>
+        <div>
+          <input type="email" name="userEmail" />
+        </div>
+        <div>
+          <input type="password" name="userPassword" />
+        </div>
+        <button type="submit">Login</button>
+      </form>
+    </Flex>
   )
 }
