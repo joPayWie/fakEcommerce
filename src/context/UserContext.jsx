@@ -1,6 +1,6 @@
-import { useEffect } from 'react'
+import { contextProvider, useEffect } from 'react'
 
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
 
 // todo lo del context de usuario
 // useEffect(

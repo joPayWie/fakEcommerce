@@ -1,0 +1,60 @@
+.glassForm {
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.authForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  font-weight: bold;
+}
+
+.googleBtn {
+  align-self: center;
+  width: 215px;
+  height: 42px;
+  background-color: #4285f4;
+  border-radius: 2px;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.googleIconWrapper {
+  position: absolute;
+  margin-top: 1px;
+  margin-left: 1px;
+  width: 40px;
+  height: 40px;
+  border-radius: 2px;
+  background-color: white;
+}
+
+.googleIcon {
+  position: absolute;
+  margin-top: 11px;
+  margin-left: 11px;
+  width: 18px;
+  height: 18px;
+}
+
+.googleBtnText {
+  float: center;
+  margin: 11px 0 0 50px;
+  color: white;
+  font-size: 14px;
+  letter-spacing: 0.2px;
+  padding-right: 3%;
+}
+
+.googleBtn:hover {
+  box-shadow: 0 0 6px #1669f2;
+}
+
+.googleBtn:active {
+  background: #1669f2;
+}

@@ -7,6 +7,7 @@ import { Products } from './pages/Products'
 import { ProductDetails } from './pages/ProductDetails'
 import { Cart } from './pages/Cart'
 import { Login } from './pages/auth/Login'
+import { Register } from './pages/auth/Register'
 import { NotFound } from './pages/NotFound'
 
 import './index.css'
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route element={<FormLayout />}>
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Route>
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />

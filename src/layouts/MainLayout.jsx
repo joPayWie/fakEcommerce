@@ -9,7 +9,7 @@ export const MainLayout = () => {
   return (
     <Flex direction="column" minH="100vh">
       <Nav />
-      <Stack h="100%" flex="1">
+      <Stack h="100%" w="100%" flex="1">
         <Outlet />
       </Stack>
       <Footer />

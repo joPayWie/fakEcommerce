@@ -25,9 +25,12 @@ export const Register = () => {
         userValues.createUserWithEmailAndPasswordassword
       )
       const user = userCredential.user
+      return user
     } catch (error) {
       const errorCode = error.code
+      console.log(errorCode)
       const errorMessage = error.message
+      console.log(errorMessage)
     }
   }
   return (

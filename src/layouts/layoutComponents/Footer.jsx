@@ -4,9 +4,9 @@ import styles from './Footer.module.css'
 
 export const Footer = () => {
   return (
-    <footer className={styles.main_footer}>
-      <div className={styles.container_footer}>
-        <div className={styles.icons_footer}>
+    <footer className={styles.mainFooter}>
+      <div className={styles.containerFooter}>
+        <div className={styles.iconsFooter}>
           <a href="https://twitter.com/" target="_blank" rel="noreferrer">
             <BsTwitter className={styles.footer_i} size={30} />
           </a>
@@ -20,7 +20,7 @@ export const Footer = () => {
         <span className={styles.copyright}>RAINBOW - fakEcommerce - 2023®</span>
         <span className={styles.signature}>
           Build with &#128154; by
-          <strong className={styles.jopay}> JoPay</strong>
+          <strong className={styles.joPay}> JoPay</strong>
         </span>
       </div>
     </footer>

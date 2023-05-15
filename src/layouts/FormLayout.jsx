@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom'
 
 import { Flex } from '@chakra-ui/react'
 
-import bgImg from '../assets/bg2.jpg'
+import bgImg from '../assets/bg3.jpg'
 
 export const FormLayout = () => {
   return (
