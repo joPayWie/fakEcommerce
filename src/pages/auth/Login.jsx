@@ -1,35 +1,39 @@
-import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 
-import { Flex, Button, Input } from '@chakra-ui/react'
+import {
+  Flex,
+  Button,
+  Input,
+  FormControl,
+  FormErrorMessage,
+} from '@chakra-ui/react'
 
 import { auth } from '../../firebase/config'
 import { signInWithEmailAndPassword } from 'firebase/auth'
+import { Link, useNavigate } from 'react-router-dom'
 
-import styles from './Login.module.css'
-import google from '../../assets/google.jpg'
+import { GoogleBtn } from './components/GoogleBtn'
+
+import styles from './Auth.module.css'
 
 export const Login = () => {
-  const [userValues, setUserValues] = useState({
-    userEmail: '',
-    userPassword: '',
-  })
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isDirty, isSubmitting },
+  } = useForm()
 
-  const handleValues = (e) => {
-    setUserValues({
-      ...userValues,
-      [e.target.name]: e.target.value,
-    })
-  }
+  const navigate = useNavigate()
 
-  const onSubmit = async (e) => {
-    e.preventDefault()
+  const signIn = async (userValues) => {
     try {
       const userCredential = await signInWithEmailAndPassword(
         auth,
-        userValues.userEmail,
-        userValues.createUserWithEmailAndPasswordassword
+        userValues.email,
+        userValues.password
       )
       const user = userCredential.user
+      navigate('/')
     } catch (error) {
       const errorCode = error.code
       const errorMessage = error.message
@@ -41,35 +45,61 @@ export const Login = () => {
       justify="center"
       align="center"
       direction="column"
-      w={{ base: '90%', md: '40%' }}
-      h={{ base: '45%', md: '50%' }}
-      py={{ base: '10%', md: '15%' }}
+      minH="fit-content"
+      w={{ base: '90%', md: '50%', lg: '40%' }}
+      p="5%"
     >
-      <form onSubmit={onSubmit} className={styles.authForm}>
-        <div className={styles.googleBtn}>
-          <div className={styles.googleIconWrapper}>
-            <img className={styles.googleIcon} src={google} />
+      <form onSubmit={handleSubmit(signIn)} className={styles.authForm}>
+        <GoogleBtn navigate={navigate} />
+        <FormControl isInvalid={errors.email}>
+          <div>
+            <label>Email</label>
+            <Input
+              bgColor="white"
+              {...register('email', {
+                required: 'Please complete this field',
+                pattern: {
+                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                  message: 'Please enter a valid email',
+                },
+              })}
+            />
           </div>
-          <p className={styles.googleBtnText}>
-            <b>Sign in with Google</b>
-          </p>
-        </div>
+          <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
+        </FormControl>
+
         <div>
-          <label>Email</label>
-          <Input type="email" name="userEmail" bgColor="white" />
+          <FormControl isInvalid={errors.password}>
+            <label>Password</label>
+            <Input
+              bgColor="white"
+              type="password"
+              {...register('password', {
+                required: 'Please complete this field',
+                minLength: {
+                  value: 6,
+                  message: 'Please enter a password with 6 characters',
+                },
+              })}
+            />
+            <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
+          </FormControl>
         </div>
-        <div>
-          <label>Password</label>
-          <Input type="password" name="userPassword" bgColor="white" />
-        </div>
-        <Button type="submit" colorScheme="green">
+        <Button
+          type="submit"
+          isLoading={isSubmitting}
+          colorScheme="green"
+          isDisabled={!isDirty}
+        >
           Login
         </Button>
-        <div>
+        <div style={{ textAlign: 'center' }}>
           <label style={{ fontWeight: '400' }}>
             Don't have an account yet?
           </label>
           <Button
+            as={Link}
+            to="/register"
             bgColor="transparent"
             ml="2px"
             _hover={{ textDecoration: 'underline' }}

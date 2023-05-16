@@ -13,6 +13,12 @@ import { NotFound } from './pages/NotFound'
 import './index.css'
 
 function App() {
+  // SPINNER PARA CHEQUEAR QUE HAYA USUARIO
+  // const isLoading = useContext()
+
+  // if (isLoading) bla bla
+  // else ...
+
   return (
     <>
       <Routes>
