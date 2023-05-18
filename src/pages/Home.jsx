@@ -1,6 +1,6 @@
 import { Flex, Heading, Text } from '@chakra-ui/react'
 
-import bgImg from '../assets/bg2.jpg'
+import bgImg from '../assets/bg3.jpg'
 
 export const Home = () => {
   return (

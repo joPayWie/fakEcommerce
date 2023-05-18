@@ -21,11 +21,15 @@ export const Products = () => {
     getData()
   }, [])
 
+  const handleProducts = (filteredProducts) => {
+    setProducts(filteredProducts)
+  }
+
   // const addToCart = () => {}
 
   return (
     <Flex h="100%" w="100%" direction="column">
-      <Filters products={products} />
+      <Filters products={products} handleProducts={handleProducts} />
       <SimpleGrid
         h="100%"
         w="100%"

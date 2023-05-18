@@ -15,6 +15,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { GoogleBtn } from './components/GoogleBtn'
 
 import styles from './Auth.module.css'
+import { useUserContext } from '../../context/UserContext'
 
 export const Login = () => {
   const {
@@ -25,6 +26,8 @@ export const Login = () => {
 
   const navigate = useNavigate()
 
+  const { handleLogin } = useUserContext()
+
   const signIn = async (userValues) => {
     try {
       const userCredential = await signInWithEmailAndPassword(
@@ -33,7 +36,8 @@ export const Login = () => {
         userValues.password
       )
       const user = userCredential.user
-      navigate('/')
+      handleLogin({ email: user.email, uid: user.uid })
+      navigate(-1)
     } catch (error) {
       const errorCode = error.code
       const errorMessage = error.message

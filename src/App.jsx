@@ -10,9 +10,15 @@ import { Login } from './pages/auth/Login'
 import { Register } from './pages/auth/Register'
 import { NotFound } from './pages/NotFound'
 
+import { useUserContext } from './context/UserContext'
+
+// import { isLoadingComponent } from '../components/isLoadingComponent'
+// TERMINAR ESTO
+
 import './index.css'
 
 function App() {
+  const isLoading = useUserContext()
   // SPINNER PARA CHEQUEAR QUE HAYA USUARIO
   // const isLoading = useContext()
 

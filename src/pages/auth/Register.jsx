@@ -33,7 +33,7 @@ export const Register = () => {
         userValues.password
       )
       const user = userCredential.user
-      navigate('/')
+      navigate(-1)
       // acá vendría la función de settear el user (traída de UseContext)
     } catch (error) {
       // mostrarle error al user!!

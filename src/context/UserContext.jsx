@@ -1,22 +1,49 @@
-import { contextProvider, useEffect } from 'react'
+import { createContext, useEffect, useState, useContext } from 'react'
 
-import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
+import { onAuthStateChanged, signOut } from 'firebase/auth'
 
-// SPINNER PARA CHEQUEAR QUE HAYA USUARIO
+import { auth } from '../firebase/config'
 
-// todo lo del context de usuario
-// useEffect(
-//   () =>
-//     onAuthStateChanged(auth, (user) => {
-//       if (user) {
-// isLoading(false)
-//         const uid = user.uid
-//         settear el user
-//
+// SPINNER PARA CHEQUEAR QUE HAYA USUARIO ISLOADING
 
-//       } else {
-// isLoading(false)
-//       }
-//     }),
-//   []
-// )
+export const UserContext = createContext()
+
+export const UserProvider = ({ children }) => {
+  const [loggedUser, setLoggedUser] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(
+    () =>
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          setIsLoading(false)
+          setLoggedUser({
+            email: user.email,
+            uid: user.uid,
+          })
+        } else {
+          setIsLoading(false)
+        }
+      }),
+    []
+  )
+
+  const handleLogin = (user) => {
+    setLoggedUser(user)
+  }
+
+  const handleLogout = () => {
+    signOut(auth)
+    setLoggedUser(null)
+  }
+
+  return (
+    <UserContext.Provider
+      value={{ handleLogin, handleLogout, loggedUser, isLoading }}
+    >
+      {children}
+    </UserContext.Provider>
+  )
+}
+
+export const useUserContext = () => useContext(UserContext)

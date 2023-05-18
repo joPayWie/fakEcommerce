@@ -20,8 +20,7 @@ export const GoogleBtn = ({ navigate }) => {
         setIsLoading(false)
         const user = result.user
         // acá vendría el setter para el user context
-        // routing al inicio (NAVIGATE de react-router-dom)
-        navigate('/')
+        navigate(-1)
       })
       .catch((error) => {
         setIsLoading(false)

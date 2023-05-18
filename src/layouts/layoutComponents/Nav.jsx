@@ -1,13 +1,28 @@
-import { Flex, HStack, Link, Button } from '@chakra-ui/react'
+import {
+  Flex,
+  HStack,
+  Link,
+  Button,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Text,
+} from '@chakra-ui/react'
 
 import { NavLink } from 'react-router-dom'
 
 import { IoCart } from 'react-icons/io5'
+import { HiUserCircle } from 'react-icons/hi'
+
+import { useUserContext } from '../../context/UserContext'
 
 import logo from '../../../src/assets/logo.png'
 import styles from './Nav.module.css'
 
 export const Nav = () => {
+  const { loggedUser, handleLogout } = useUserContext()
+
   return (
     <nav className={styles.navBar}>
       <img
@@ -44,20 +59,47 @@ export const Nav = () => {
         >
           PRODUCTS
         </Link>
-        <Link
-          as={NavLink}
-          to="/login"
-          color="#feb823"
-          rounded="md"
-          px=".5rem"
-          _hover={{
-            textDecoration: 'none',
-            bgColor: '#feb823',
-            color: 'white',
-          }}
-        >
-          LOGIN
-        </Link>
+        {loggedUser ? (
+          <Menu>
+            <MenuButton
+              as={Button}
+              color="#feb823"
+              rounded="md"
+              px=".5rem"
+              _hover={{
+                textDecoration: 'none',
+                bgColor: '#feb823',
+                color: 'white',
+              }}
+            >
+              <HiUserCircle />
+            </MenuButton>
+            <MenuList>
+              <Text p={2} fontWeight="medium">
+                {loggedUser.email}
+              </Text>
+              <MenuItem as={Button} onClick={handleLogout}>
+                Logout
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        ) : (
+          <Link
+            as={NavLink}
+            to="/login"
+            color="#feb823"
+            rounded="md"
+            px=".5rem"
+            _hover={{
+              textDecoration: 'none',
+              bgColor: '#feb823',
+              color: 'white',
+            }}
+          >
+            LOGIN
+          </Link>
+        )}
+
         <Flex
           as={Button}
           color="#00cb7f"
