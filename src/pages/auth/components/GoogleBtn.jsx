@@ -10,7 +10,7 @@ import google from '../../../assets/google.jpg'
 
 const provider = new GoogleAuthProvider()
 
-export const GoogleBtn = ({ navigate }) => {
+export const GoogleBtn = ({ navigate, handleLogin }) => {
   const [isLoading, setIsLoading] = useState(false)
 
   const loginWithGoogle = () => {
@@ -19,8 +19,8 @@ export const GoogleBtn = ({ navigate }) => {
       .then((result) => {
         setIsLoading(false)
         const user = result.user
-        // acá vendría el setter para el user context
-        navigate(-1)
+        handleLogin({ email: user.email, uid: user.uid })
+        navigate(-2)
       })
       .catch((error) => {
         setIsLoading(false)

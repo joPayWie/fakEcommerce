@@ -8,6 +8,8 @@ import { ProductDetails } from './pages/ProductDetails'
 import { Cart } from './pages/Cart'
 import { Login } from './pages/auth/Login'
 import { Register } from './pages/auth/Register'
+import { Orders } from './pages/Orders'
+import { CheckOut } from './pages/CheckOut'
 import { NotFound } from './pages/NotFound'
 
 import { useUserContext } from './context/UserContext'
@@ -22,8 +24,10 @@ function App() {
   // SPINNER PARA CHEQUEAR QUE HAYA USUARIO
   // const isLoading = useContext()
 
-  // if (isLoading) bla bla
-  // else ...
+  // if (isLoading) return <isLoadingComponent> bla bla
+  // else ... return lo de abajo
+
+  // dónde hago el condicional para renderizar la ruta protegida checkout?s
 
   return (
     <>
@@ -38,6 +42,9 @@ function App() {
           <Route path="/products/:productId" element={<ProductDetails />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="*" element={<NotFound />} />
+          <Route element={<Orders />}>
+            <Route path="/checkout" element={<CheckOut />} />
+          </Route>
         </Route>
       </Routes>
     </>

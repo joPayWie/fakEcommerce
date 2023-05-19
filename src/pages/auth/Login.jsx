@@ -54,7 +54,7 @@ export const Login = () => {
       p="5%"
     >
       <form onSubmit={handleSubmit(signIn)} className={styles.authForm}>
-        <GoogleBtn navigate={navigate} />
+        <GoogleBtn navigate={navigate} handleLogin={handleLogin} />
         <FormControl isInvalid={errors.email}>
           <div>
             <label>Email</label>
