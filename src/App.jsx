@@ -13,20 +13,14 @@ import { NotFound } from './pages/NotFound'
 
 import { useUserContext } from './context/UserContext'
 
-// import { isLoadingComponent } from '../components/isLoadingComponent'
+import { IsLoadingComponent } from './components/IsLoadingComponent'
 // TERMINAR ESTO
 
 import './index.css'
 
 function App() {
   const { isLoading } = useUserContext()
-  // SPINNER PARA CHEQUEAR QUE HAYA USUARIO
-  // const isLoading = useContext()
-  if (isLoading) return <p>Is loading</p>
-
-  // if (isLoading) return <isLoadingComponent>
-
-  // else ... return lo de abajo
+  if (isLoading) return <IsLoadingComponent />
 
   // dónde hago el condicional para renderizar la ruta protegida checkout?s
 

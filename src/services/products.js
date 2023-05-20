@@ -25,5 +25,6 @@ export const getOneProduct = async (id) => {
 }
 
 export const createOrder = async (order) => {
-  await setDoc(doc(DB, 'orders'), order)
+  console.log(order)
+  await setDoc(doc(DB, 'orders', self.crypto.randomUUID()), order)
 }

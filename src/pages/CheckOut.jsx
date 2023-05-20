@@ -1,4 +1,4 @@
-import { Flex, Heading, Input, Button } from '@chakra-ui/react'
+import { Flex, Heading, Input, Button, FormControl } from '@chakra-ui/react'
 
 import { useForm } from 'react-hook-form'
 
@@ -7,18 +7,30 @@ import { useUserContext } from '../context/UserContext'
 import { createOrder } from '../services/products'
 
 export const CheckOut = () => {
-  const { cartContent } = useCartContext()
+  const { cart } = useCartContext()
   const { loggedUser } = useUserContext()
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm()
 
   const submitOrder = async (consumerObject) => {
     try {
       await createOrder({
-        consumer: consumerObject,
-        cart: cartContent,
-        // total: esto lo calcula la función que viene de CartContext
+        consumer: {
+          name: consumerObject.name,
+          email: loggedUser.email,
+          address: consumerObject.address,
+          zipCode: consumerObject.zipCode,
+        },
+        cart: cart,
+        total: 0,
       })
     } catch (error) {
-      // bla bla
+      const errorCode = error.code
+      const errorMessage = error.message
     }
   }
 
@@ -30,20 +42,42 @@ export const CheckOut = () => {
       </Flex>
       <Flex>
         <Heading>Contact information</Heading>
-        <form>
-          <label>Name</label>
-          <Input type="text" />
+        <form type="submit" onSubmit={handleSubmit(submitOrder)}>
+          <FormControl isInvalid={errors.name}>
+            <label>Name</label>
+            <Input
+              {...register('name', {
+                required: 'Please complete this field',
+              })}
+            />
+          </FormControl>
+
           <label>Email</label>
           <Input type="email" value={loggedUser.email} readOnly />
-          <label>Address</label>
-          <Input type="text" />
-          <label>ZIP code</label>
-          <Input type="number" />
+          <FormControl isInvalid={errors.address}>
+            <label>Address</label>
+            <Input
+              {...register('address', {
+                required: 'Please complete this field',
+              })}
+            />
+          </FormControl>
+          <FormControl isInvalid={errors.zipCode}>
+            <label>ZIP code</label>
+            <Input
+              {...register('zipCode', {
+                required: 'Please complete this field',
+              })}
+            />
+          </FormControl>
+
           <Flex>
             <Heading>Total:</Heading>
             <Heading>Here comes the total price</Heading>
           </Flex>
-          <Button>Place order</Button>
+          <Button type="submit" isLoading={isSubmitting}>
+            Place order
+          </Button>
         </form>
       </Flex>
     </Flex>
