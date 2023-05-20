@@ -7,16 +7,20 @@ import { SkeletonCard } from '../components/SkeletonCard'
 import { Filters } from '../components/Filters'
 
 import { getProducts } from '../services/products'
+import { set } from 'react-hook-form'
 
 export const Products = () => {
+  const [originalProducts, setOriginalProducts] = useState([])
   const [products, setProducts] = useState([])
   const [skeleton, setSkeleton] = useState(true)
+  // const [areThereFilters, setAreThereFilters] = useState(false)
 
   useEffect(() => {
     const getData = async () => {
-      const products = await getProducts()
+      const fetchedProducts = await getProducts()
       setSkeleton(false)
-      setProducts(products)
+      setOriginalProducts(fetchedProducts)
+      setProducts(fetchedProducts)
     }
     getData()
   }, [])
@@ -29,7 +33,11 @@ export const Products = () => {
 
   return (
     <Flex h="100%" w="100%" direction="column">
-      <Filters products={products} handleProducts={handleProducts} />
+      <Filters
+        products={products}
+        handleProducts={handleProducts}
+        originalProducts={originalProducts}
+      />
       <SimpleGrid
         h="100%"
         w="100%"

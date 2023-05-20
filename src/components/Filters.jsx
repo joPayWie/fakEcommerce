@@ -2,10 +2,8 @@ import { useState } from 'react'
 
 import { BsSearchHeart } from 'react-icons/bs'
 import { Input, Select } from '@chakra-ui/react'
-import { DB } from '../firebase/config'
-import { collection, getDocs, query, where } from 'firebase/firestore'
 
-export const Filters = ({ products, handleProducts }) => {
+export const Filters = ({ products, handleProducts, originalProducts }) => {
   const [currentCategories, setCurrentCategories] = useState([])
   const [name, setName] = useState('')
   const [category, setCategory] = useState('')
@@ -23,55 +21,29 @@ export const Filters = ({ products, handleProducts }) => {
   getAllCategories(products)
   // useDebounce
 
-  // const getProductsWithCategories = async () => {
-  //   const q = query(
-  //     collection(DB, 'products'),
-  //     where('categories', 'array-contains', { category })
-  //   )
-  //   const querySnapshot = await getDocs(q)
-  //   return querySnapshot
-  // }
-
-  const filterByName = (productArr, nameSearched) => {
-    return productArr.filter((product) =>
-      product.name.toLowerCase().includes(nameSearched.toLowerCase())
-    )
-  }
-
-  const filterByCategory = (productArr, category) => {
-    productArr.filter((product) => {
-      return product.categories.includes(category)
-    })
-  }
-
-  const filterByPrice = (productArr, price) => {
-    productArr.filter((product) => {
-      return product.price <= price
-    })
-  }
-
   const filterProducts = (e) => {
     e.preventDefault()
-    let productsToFilter = products
+    let productsToFilter = originalProducts
     if (name !== '') {
-      productsToFilter = filterByName(products, name)
-      console.log(productsToFilter)
+      productsToFilter = productsToFilter.filter((product) =>
+        product.name.toLowerCase().includes(name.toLowerCase())
+      )
     }
     if (category !== '') {
-      productsToFilter = filterByCategory(products, category)
-      console.log(productsToFilter)
+      productsToFilter = productsToFilter.filter((product) => {
+        return product.categories.includes(category)
+      })
     }
     if (maxPrice !== '') {
-      productsToFilter = filterByPrice(products, maxPrice)
-      console.log(productsToFilter)
+      productsToFilter = productsToFilter.filter((product) => {
+        return product.price <= maxPrice
+      })
     }
-    console.log(productsToFilter)
-    return productsToFilter
+    return handleProducts(productsToFilter)
   }
 
   return (
     <form
-      // onSubmit={filterProducts}
       style={{
         display: 'flex',
         padding: '10px',
