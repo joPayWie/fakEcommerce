@@ -1,4 +1,4 @@
-import { collection, getDocs, doc, getDoc } from 'firebase/firestore'
+import { collection, getDocs, doc, getDoc, setDoc } from 'firebase/firestore'
 import { DB } from '../firebase/config'
 
 export const getProducts = async () => {
@@ -22,4 +22,8 @@ export const getOneProduct = async (id) => {
     const product = productSnap.data()
     return product
   }
+}
+
+export const createOrder = async (order) => {
+  await setDoc(doc(DB, 'orders'), order)
 }
