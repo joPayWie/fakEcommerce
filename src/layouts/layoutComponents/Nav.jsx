@@ -16,14 +16,21 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
+  Card,
+  Image,
+  Stack,
+  CardBody,
+  Heading,
 } from '@chakra-ui/react'
 
 import { NavLink } from 'react-router-dom'
 
 import { IoCart } from 'react-icons/io5'
+import { BsFillTrash3Fill } from 'react-icons/bs'
 import { HiUserCircle } from 'react-icons/hi'
 
 import { useUserContext } from '../../context/UserContext'
+import { useCartContext } from '../../context/CartContext'
 
 import logo from '../../../src/assets/logo.png'
 import styles from './Nav.module.css'
@@ -31,6 +38,7 @@ import styles from './Nav.module.css'
 export const Nav = () => {
   const { loggedUser, handleLogout } = useUserContext()
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const { cart, deleteItem, resetCart } = useCartContext()
 
   return (
     <>
@@ -128,17 +136,44 @@ export const Nav = () => {
         </HStack>
       </nav>
 
+      {/* CART */}
+
       <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader>Your cart</DrawerHeader>
 
-          <DrawerBody></DrawerBody>
+          <DrawerBody>
+            {cart.map((product) => (
+              <Card
+                key={product.id}
+                direction={{ base: 'column', sm: 'row' }}
+                overflow="hidden"
+                variant="outline"
+              >
+                <Image maxH="50px" src={product.image} alt={product.name} />
+
+                <Stack>
+                  <CardBody>
+                    <Heading size="sm">{product.name}</Heading>
+                    <Text py="2">${product.price}</Text>
+                    <Button
+                      variant="solid"
+                      colorScheme="red"
+                      onClick={() => deleteItem(product.id)}
+                    >
+                      <BsFillTrash3Fill />
+                    </Button>
+                  </CardBody>
+                </Stack>
+              </Card>
+            ))}
+          </DrawerBody>
 
           <DrawerFooter>
-            <Button variant="outline" mr={3} onClick={onClose}>
-              Cancel
+            <Button variant="outline" mr={3} onClick={resetCart}>
+              Delete all
             </Button>
             <Button as={NavLink} to="/checkout" colorScheme="blue">
               Checkout

@@ -17,8 +17,11 @@ import { Link } from 'react-router-dom'
 
 import { IoCart } from 'react-icons/io5'
 
+import { useCartContext } from '../context/CartContext'
+
 export const ProductCard = ({ product }) => {
   const { id, image, name, description, price } = product
+  const { addToCart } = useCartContext()
   return (
     <Card m="3">
       <CardBody>
@@ -48,7 +51,7 @@ export const ProductCard = ({ product }) => {
           <Button as={Link} to={id} variant="ghost" colorScheme="blue">
             Details
           </Button>
-          <Button colorScheme="blue" gap={2}>
+          <Button colorScheme="blue" gap={2} onClick={() => addToCart(product)}>
             <span style={{ color: 'white' }}>Add to cart</span>
             <IoCart size={22.5} />
           </Button>
