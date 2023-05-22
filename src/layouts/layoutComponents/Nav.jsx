@@ -175,7 +175,13 @@ export const Nav = () => {
             <Button variant="outline" mr={3} onClick={resetCart}>
               Delete all
             </Button>
-            <Button as={NavLink} to="/checkout" colorScheme="blue">
+            <Button
+              as={NavLink}
+              to={cart.length > 0 ? '/checkout' : '#'}
+              colorScheme="blue"
+              onClick={onClose}
+              isDisabled={!cart.length > 0}
+            >
               Checkout
             </Button>
           </DrawerFooter>

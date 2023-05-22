@@ -23,13 +23,14 @@ import { IoCart } from 'react-icons/io5'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 
 import { SkeletonCard } from '../components/SkeletonCard'
-import { CartContext } from '../context/CartContext'
+import { useCartContext } from '../context/CartContext'
 import { getOneProduct } from '../services/products'
 
 export const ProductDetails = () => {
   const [selectedProduct, setSelectedProduct] = useState({})
   const [productCategories, setProductCategories] = useState([])
   const [skeleton, setSkeleton] = useState(true)
+  const { addToCart } = useCartContext()
 
   const param = useParams()
 
@@ -153,7 +154,7 @@ export const ProductDetails = () => {
                     transform: 'translateY(2px)',
                     boxShadow: 'lg',
                   }}
-                  // onClick={addProductToCart(product)}
+                  onClick={() => addToCart(selectedProduct)}
                 >
                   <span style={{ marginRight: '10px' }}>Add to cart</span>
                   <IoCart size={25} />

@@ -1,9 +1,11 @@
 import { createContext, useContext, useState } from 'react'
+import { useLocalStorage } from '../hooks/useLocalStorage'
 
 export const CartContext = createContext()
 
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([])
+  const { setLocalStorage, getLocalStorage } = useLocalStorage()
+  const [cart, setCart] = useState(getLocalStorage('cart') || [])
 
   const addToCart = (item) => {
     const includedInCart = cart.find((product) => product.id === item.id)
@@ -18,18 +20,25 @@ export const CartProvider = ({ children }) => {
         return product
       })
       setCart(newCart)
+      setLocalStorage('cart', newCart)
     } else {
       const newCart = [...cart, { ...item, quantity: 1 }]
       setCart(newCart)
+      setLocalStorage('cart', newCart)
     }
   }
 
   const deleteItem = (id) => {
-    setCart(cart.filter((item) => item.id !== id))
+    const currentCart = getLocalStorage('cart')
+    const filteredCart = currentCart.filter((item) => item.id !== id)
+    setCart(filteredCart)
+    setLocalStorage('cart', filteredCart)
   }
 
   const resetCart = () => {
-    setCart([])
+    const emptyCart = []
+    setCart(emptyCart)
+    setLocalStorage('cart', emptyCart)
   }
 
   const calculateTotal = () => {
