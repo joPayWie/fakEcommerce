@@ -9,6 +9,7 @@ import { Login } from './pages/auth/Login'
 import { Register } from './pages/auth/Register'
 import { ProtectedGuard } from './guards/ProtectedGuard'
 import { CheckOut } from './pages/CheckOut'
+import { SuccesfulOrder } from './pages/SuccesfulOrder'
 import { NotFound } from './pages/NotFound'
 
 import { useUserContext } from './context/UserContext'
@@ -38,6 +39,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
           <Route element={<ProtectedGuard />}>
             <Route path="/checkout" element={<CheckOut />} />
+            <Route path="/succesfulorder" element={<SuccesfulOrder />} />
           </Route>
         </Route>
       </Routes>

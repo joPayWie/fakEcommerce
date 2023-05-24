@@ -7,6 +7,10 @@ export const CartProvider = ({ children }) => {
   const { setLocalStorage, getLocalStorage } = useLocalStorage()
   const [cart, setCart] = useState(getLocalStorage('cart') || [])
 
+  const calculateTotal = () => {
+    return cart.reduce((acc, product) => acc + product.price, 0)
+  }
+
   const addToCart = (item) => {
     const includedInCart = cart.find((product) => product.id === item.id)
     if (includedInCart) {
@@ -41,14 +45,12 @@ export const CartProvider = ({ children }) => {
     setLocalStorage('cart', emptyCart)
   }
 
-  const calculateTotal = () => {
-    return cart.reduce((acc, product) => acc + product.price, 0)
-  }
-
   // recorre el array y "recopila" cierta información para sumarla en el segundo parámetro
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, deleteItem, resetCart }}>
+    <CartContext.Provider
+      value={{ cart, addToCart, deleteItem, resetCart, calculateTotal }}
+    >
       {children}
     </CartContext.Provider>
   )

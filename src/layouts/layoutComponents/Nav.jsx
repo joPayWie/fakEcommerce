@@ -82,6 +82,7 @@ export const Nav = () => {
               <MenuButton
                 as={Button}
                 color="#feb823"
+                bgColor="white"
                 rounded="md"
                 px=".5rem"
                 _hover={{
@@ -90,7 +91,7 @@ export const Nav = () => {
                   color: 'white',
                 }}
               >
-                <HiUserCircle />
+                <HiUserCircle size={22.5} />
               </MenuButton>
               <MenuList>
                 <Text p={2} fontWeight="medium">

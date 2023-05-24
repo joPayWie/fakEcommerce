@@ -1,14 +1,16 @@
 import { Flex, Heading, Input, Button, FormControl } from '@chakra-ui/react'
 
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
 import { useCartContext } from '../context/CartContext'
 import { useUserContext } from '../context/UserContext'
 import { createOrder } from '../services/products'
 
 export const CheckOut = () => {
-  const { cart } = useCartContext()
+  const { cart, calculateTotal, resetCart } = useCartContext()
   const { loggedUser } = useUserContext()
+  const navigate = useNavigate()
 
   const {
     register,
@@ -26,8 +28,10 @@ export const CheckOut = () => {
           zipCode: consumerObject.zipCode,
         },
         cart: cart,
-        total: 0,
+        total: calculateTotal(),
       })
+      resetCart()
+      navigate('/succesfulorder')
     } catch (error) {
       const errorCode = error.code
       const errorMessage = error.message
@@ -73,7 +77,7 @@ export const CheckOut = () => {
 
           <Flex>
             <Heading>Total:</Heading>
-            <Heading>Here comes the total price</Heading>
+            <Heading>{calculateTotal()}</Heading>
           </Flex>
           <Button type="submit" isLoading={isSubmitting}>
             Place order

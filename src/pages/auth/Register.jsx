@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom'
 import { auth } from '../../firebase/config'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 
+import { useUserContext } from '../../context/UserContext'
 import { GoogleBtn } from './components/GoogleBtn'
 
 import styles from './Auth.module.css'
@@ -22,6 +23,7 @@ export const Register = () => {
     handleSubmit,
     formState: { errors, isDirty, isSubmitting },
   } = useForm()
+  const { handleLogin } = useUserContext()
 
   const navigate = useNavigate()
 
@@ -33,8 +35,8 @@ export const Register = () => {
         userValues.password
       )
       const user = userCredential.user
+      handleLogin({ email: user.email, uid: user.uid })
       navigate(-1)
-      // acá vendría la función de settear el user (traída de UseContext)
     } catch (error) {
       // mostrarle error al user!!
       const errorCode = error.code
