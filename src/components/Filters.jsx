@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
-import { BsSearchHeart } from 'react-icons/bs'
-import { Input, Select } from '@chakra-ui/react'
+import { BsSearch } from 'react-icons/bs'
+import { Button, Input, Select } from '@chakra-ui/react'
 
 export const Filters = ({ products, handleProducts, originalProducts }) => {
   const [currentCategories, setCurrentCategories] = useState([])
@@ -19,7 +19,6 @@ export const Filters = ({ products, handleProducts, originalProducts }) => {
   }
 
   getAllCategories(products)
-  // useDebounce
 
   const filterProducts = (e) => {
     e.preventDefault()
@@ -51,6 +50,7 @@ export const Filters = ({ products, handleProducts, originalProducts }) => {
         alignItems: 'center',
         backgroundColor: '#E7F5F8',
       }}
+      onSubmit={filterProducts}
     >
       <label style={{ fontWeight: 'bold' }}>Name</label>
       <Input
@@ -80,9 +80,9 @@ export const Filters = ({ products, handleProducts, originalProducts }) => {
         value={maxPrice}
         onChange={(e) => setMaxPrice(e.target.value)}
       />
-      <button onClick={filterProducts}>
-        <BsSearchHeart />
-      </button>
+      <Button type="submit" colorScheme="green" onClick={filterProducts}>
+        <BsSearch size={100} />
+      </Button>
     </form>
   )
 }
