@@ -28,6 +28,8 @@ export const Login = () => {
 
   const { handleLogin } = useUserContext()
 
+  const pagesUserHasNavigate = window.history.state.idx
+
   const signIn = async (userValues) => {
     try {
       const userCredential = await signInWithEmailAndPassword(
@@ -37,7 +39,9 @@ export const Login = () => {
       )
       const user = userCredential.user
       handleLogin({ email: user.email, uid: user.uid })
-      navigate(-1)
+      {
+        pagesUserHasNavigate === 0 ? navigate('/products') : navigate(-1)
+      }
     } catch (error) {
       const errorCode = error.code
       const errorMessage = error.message

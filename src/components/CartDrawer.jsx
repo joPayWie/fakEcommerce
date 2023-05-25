@@ -35,13 +35,15 @@ export const CartDrawer = () => {
         color="#00cb7f"
         rounded="md"
         p=".5rem"
-        bgColor="transparent"
+        bgColor="white"
+        w="100%"
         _hover={{
           textDecoration: 'none',
           bgColor: '#00cb7f',
           color: 'white',
         }}
         onClick={onOpen}
+        aria-label="Cart"
       >
         <IoCart size={30} />
       </Flex>

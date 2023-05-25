@@ -59,6 +59,15 @@ export const Filters = ({ products, handleProducts, originalProducts }) => {
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
+
+      <label style={{ fontWeight: 'bold' }}>Max price</label>
+      <Input
+        type="number"
+        placeholder="Up to..."
+        bgColor="white"
+        value={maxPrice}
+        onChange={(e) => setMaxPrice(e.target.value)}
+      />
       <label style={{ fontWeight: 'bold' }}>Category</label>
       <Select
         placeholder="All"
@@ -72,14 +81,6 @@ export const Filters = ({ products, handleProducts, originalProducts }) => {
           </option>
         ))}
       </Select>
-      <label style={{ fontWeight: 'bold' }}>Max price</label>
-      <Input
-        type="number"
-        placeholder="Up to..."
-        bgColor="white"
-        value={maxPrice}
-        onChange={(e) => setMaxPrice(e.target.value)}
-      />
       <Button type="submit" colorScheme="green" onClick={filterProducts}>
         <BsSearch size={100} />
       </Button>

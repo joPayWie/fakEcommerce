@@ -12,6 +12,7 @@ const provider = new GoogleAuthProvider()
 
 export const GoogleBtn = ({ navigate, handleLogin }) => {
   const [isLoading, setIsLoading] = useState(false)
+  const pagesUserHasNavigate = window.history.state.idx
 
   const loginWithGoogle = () => {
     setIsLoading(true)
@@ -20,7 +21,9 @@ export const GoogleBtn = ({ navigate, handleLogin }) => {
         setIsLoading(false)
         const user = result.user
         handleLogin({ email: user.email, uid: user.uid })
-        navigate(-2)
+        {
+          pagesUserHasNavigate < 2 ? navigate('/products') : navigate(-2)
+        }
       })
       .catch((error) => {
         setIsLoading(false)
