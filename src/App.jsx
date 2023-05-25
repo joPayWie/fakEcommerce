@@ -14,14 +14,15 @@ import { NotFound } from './pages/NotFound'
 
 import { useUserContext } from './context/UserContext'
 
-import { IsLoadingComponent } from './components/IsLoadingComponent'
+import { IsLoading } from './components/IsLoading'
+
 // TERMINAR ESTO
 
 import './index.css'
 
 function App() {
   const { isLoading } = useUserContext()
-  if (isLoading) return <IsLoadingComponent />
+  if (isLoading) return <IsLoading />
 
   // dónde hago el condicional para renderizar la ruta protegida checkout?s
 
