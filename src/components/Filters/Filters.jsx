@@ -1,7 +1,9 @@
 import { useState } from 'react'
 
-import { BsSearch } from 'react-icons/bs'
+import { SearchIcon } from '@chakra-ui/icons'
 import { Button, Input, Select } from '@chakra-ui/react'
+
+import styles from './Filters.module.css'
 
 export const Filters = ({ products, handleProducts, originalProducts }) => {
   const [currentCategories, setCurrentCategories] = useState([])
@@ -42,16 +44,7 @@ export const Filters = ({ products, handleProducts, originalProducts }) => {
   }
 
   return (
-    <form
-      style={{
-        display: 'flex',
-        padding: '10px',
-        gap: '10px',
-        alignItems: 'center',
-        backgroundColor: '#E7F5F8',
-      }}
-      onSubmit={filterProducts}
-    >
+    <form className={styles.filterForm} onSubmit={filterProducts}>
       <label style={{ fontWeight: 'bold' }}>Name</label>
       <Input
         placeholder="Search"
@@ -81,8 +74,13 @@ export const Filters = ({ products, handleProducts, originalProducts }) => {
           </option>
         ))}
       </Select>
-      <Button type="submit" colorScheme="green" onClick={filterProducts}>
-        <BsSearch size={100} />
+      <Button
+        type="submit"
+        colorScheme="green"
+        w={{ base: '50%', md: 'auto' }}
+        onClick={filterProducts}
+      >
+        <SearchIcon size={50} />
       </Button>
     </form>
   )

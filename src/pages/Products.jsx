@@ -4,7 +4,7 @@ import { SimpleGrid, Flex, Heading } from '@chakra-ui/react'
 
 import { ProductCard } from '../components/ProductCard'
 import { SkeletonCard } from '../components/SkeletonCard'
-import { Filters } from '../components/Filters'
+import { Filters } from '../components/Filters/Filters'
 
 import { getProducts } from '../services/products'
 
