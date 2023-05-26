@@ -17,6 +17,7 @@ import {
   StackDivider,
   List,
   ListItem,
+  useToast,
 } from '@chakra-ui/react'
 
 import { IoCart } from 'react-icons/io5'
@@ -33,6 +34,8 @@ export const ProductDetails = () => {
   const { addToCart } = useCartContext()
 
   const param = useParams()
+  const toast = useToast()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const getData = async () => {
@@ -43,22 +46,6 @@ export const ProductDetails = () => {
     }
     getData()
   }, [param])
-  // const product = buscar producto en la database
-  // acá puedo usar un useMemo para guardar el producto que me traiga la database
-
-  const navigate = useNavigate()
-  // la función navigate debemos usarla dentro de la función de agregar al carrito
-  // permite que nos movamos en rutas dependiendo de lo que el user va haciendo
-  // EN MI APP ESTO VA A IR EN EL BOTÓN DEL DRAWER
-
-  // const { addProduct} = useContext(CartContext)
-  // const addProductToCart = (product) => {
-  //     addProduct([... cart, product])
-  // navigate("/cart")
-  // }
-
-  // esta función navigate también te permite ir a la ruta previa en la que estabas
-  // esto se hace ejecutando el navigate(-1)
 
   return (
     <>
@@ -154,7 +141,16 @@ export const ProductDetails = () => {
                     transform: 'translateY(2px)',
                     boxShadow: 'lg',
                   }}
-                  onClick={() => addToCart(selectedProduct)}
+                  onClick={() => {
+                    addToCart(selectedProduct)
+                    toast({
+                      title: 'Succesful!',
+                      description: 'The product was successfully added to cart',
+                      status: 'success',
+                      duration: 2000,
+                      isClosable: true,
+                    })
+                  }}
                 >
                   <span style={{ marginRight: '10px' }}>Add to cart</span>
                   <IoCart size={25} />

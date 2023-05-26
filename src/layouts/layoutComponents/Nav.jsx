@@ -89,11 +89,15 @@ export const Nav = () => {
                   bgColor: '#feb823',
                   color: 'white',
                 }}
+                _active={{
+                  bgColor: '#feb823',
+                  color: 'white',
+                }}
               >
                 <HiUserCircle size={22.5} />
               </MenuButton>
               <MenuList>
-                <Text p={2} fontWeight="medium">
+                <Text p={2} fontWeight="medium" textAlign="center">
                   {loggedUser.email}
                 </Text>
                 <MenuItem as={Button} onClick={handleLogout}>
@@ -123,6 +127,7 @@ export const Nav = () => {
         {/* MOBILE */}
         <Box display={{ base: 'flex', md: 'none' }} fontWeight="semibold">
           <IconButton
+            colorScheme="blue"
             aria-label="Open Menu"
             size="lg"
             mr={2}
@@ -142,9 +147,12 @@ export const Nav = () => {
           >
             <Flex justify="flex-end">
               <IconButton
+                colorScheme="blue"
+                S
                 mt={2}
                 mr={2}
-                aria-label="Open Menu"
+                mb={2}
+                aria-label="Close Menu"
                 size="lg"
                 icon={<CloseIcon />}
                 onClick={() => changeBurgerDisplay('none')}
@@ -164,6 +172,7 @@ export const Nav = () => {
                   bgColor: '#6482f3',
                   color: 'white',
                 }}
+                onClick={() => changeBurgerDisplay('none')}
               >
                 HOME
               </Button>
@@ -178,6 +187,7 @@ export const Nav = () => {
                   bgColor: '#f9643f',
                   color: 'white',
                 }}
+                onClick={() => changeBurgerDisplay('none')}
               >
                 PRODUCTS
               </Button>
@@ -191,7 +201,10 @@ export const Nav = () => {
                     bgColor: '#feb823',
                     color: 'white',
                   }}
-                  onClick={handleLogout}
+                  onClick={() => {
+                    handleLogout
+                    changeBurgerDisplay('none')
+                  }}
                 >
                   LOGOUT
                 </Button>
@@ -207,6 +220,7 @@ export const Nav = () => {
                     bgColor: '#feb823',
                     color: 'white',
                   }}
+                  onClick={() => changeBurgerDisplay('none')}
                 >
                   LOGIN
                 </Button>

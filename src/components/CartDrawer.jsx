@@ -80,7 +80,7 @@ export const CartDrawer = () => {
             ))}
           </DrawerBody>
 
-          <DrawerFooter>
+          <DrawerFooter pb={{ base: '50', md: '15px' }}>
             <Button variant="outline" mr={3} onClick={resetCart}>
               Delete all
             </Button>

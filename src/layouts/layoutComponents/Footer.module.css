@@ -4,7 +4,7 @@
 }
 
 footer strong {
-  font-family: remachine;
+  font-family: remachine !important;
 }
 
 .mainFooter {

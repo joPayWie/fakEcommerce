@@ -1,4 +1,15 @@
-import { Flex, Heading, Input, Button, FormControl } from '@chakra-ui/react'
+import {
+  Flex,
+  Heading,
+  Input,
+  Button,
+  FormControl,
+  Card,
+  Image,
+  Stack,
+  CardBody,
+  Text,
+} from '@chakra-ui/react'
 
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
@@ -6,9 +17,13 @@ import { useNavigate } from 'react-router-dom'
 import { useCartContext } from '../context/CartContext'
 import { useUserContext } from '../context/UserContext'
 import { createOrder } from '../services/products'
+import { BsFillTrash3Fill } from 'react-icons/bs'
+
+import bgImg from '../assets/bg3.jpg'
+import styles from './Pages.module.css'
 
 export const CheckOut = () => {
-  const { cart, calculateTotal, resetCart } = useCartContext()
+  const { cart, calculateTotal, resetCart, deleteItem } = useCartContext()
   const { loggedUser } = useUserContext()
   const navigate = useNavigate()
 
@@ -39,20 +54,57 @@ export const CheckOut = () => {
   }
 
   return (
-    <Flex>
-      <Flex>
-        <Heading>Generate order</Heading>
-        <Flex>Here goes your product</Flex>
+    <Flex justify="space-around" p={5} bgImage={bgImg} bgSize="cover">
+      <Flex direction="column" gap="15px">
+        <Heading>Your products</Heading>
+        <Flex>
+          {cart.map((product) => (
+            <Card
+              key={product.id}
+              direction={{ base: 'column', sm: 'row' }}
+              overflow="hidden"
+              variant="outline"
+              padding={2}
+            >
+              <Image maxH="50px" src={product.image} alt={product.name} />
+
+              <Stack>
+                <CardBody>
+                  <Heading size="sm">{product.name}</Heading>
+                  <Text py="2">${product.price}</Text>
+                  <Button
+                    variant="solid"
+                    colorScheme="red"
+                    onClick={() => deleteItem(product.id)}
+                  >
+                    <BsFillTrash3Fill />
+                  </Button>
+                </CardBody>
+              </Stack>
+            </Card>
+          ))}
+        </Flex>
       </Flex>
-      <Flex>
+      <Flex direction="column" gap="15px" alignItems="flex-start">
         <Heading>Contact information</Heading>
-        <form type="submit" onSubmit={handleSubmit(submitOrder)}>
+        <form
+          className={styles.checkoutForm}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            width: '100%',
+            gap: '5px',
+          }}
+          type="submit"
+          onSubmit={handleSubmit(submitOrder)}
+        >
           <FormControl isInvalid={errors.name}>
             <label>Name</label>
             <Input
               {...register('name', {
                 required: 'Please complete this field',
               })}
+              bgColor="white"
             />
           </FormControl>
 
@@ -64,6 +116,7 @@ export const CheckOut = () => {
               {...register('address', {
                 required: 'Please complete this field',
               })}
+              bgColor="white"
             />
           </FormControl>
           <FormControl isInvalid={errors.zipCode}>
@@ -72,14 +125,15 @@ export const CheckOut = () => {
               {...register('zipCode', {
                 required: 'Please complete this field',
               })}
+              bgColor="white"
             />
           </FormControl>
 
-          <Flex>
-            <Heading>Total:</Heading>
-            <Heading>{calculateTotal()}</Heading>
+          <Flex alignSelf="self-end" gap="15px" alignItems="center">
+            <Heading size="md">Total:</Heading>
+            <Heading size="lg">${calculateTotal()}</Heading>
           </Flex>
-          <Button type="submit" isLoading={isSubmitting}>
+          <Button colorScheme="green" type="submit" isLoading={isSubmitting}>
             Place order
           </Button>
         </form>
