@@ -9,6 +9,7 @@ import {
   Stack,
   CardBody,
   Text,
+  SimpleGrid,
 } from '@chakra-ui/react'
 
 import { useForm } from 'react-hook-form'
@@ -54,10 +55,16 @@ export const CheckOut = () => {
   }
 
   return (
-    <Flex justify="space-around" p={5} bgImage={bgImg} bgSize="cover">
+    <Flex
+      justify="space-around"
+      p={5}
+      bgImage={bgImg}
+      bgSize="cover"
+      direction={{ base: 'column', lg: 'row' }}
+    >
       <Flex direction="column" gap="15px">
         <Heading>Your products</Heading>
-        <Flex>
+        <SimpleGrid columns={{ base: '2', md: '3' }} gap="10px">
           {cart.map((product) => (
             <Card
               key={product.id}
@@ -71,7 +78,8 @@ export const CheckOut = () => {
               <Stack>
                 <CardBody>
                   <Heading size="sm">{product.name}</Heading>
-                  <Text py="2">${product.price}</Text>
+                  <Text py="2">x{product.quantity}</Text>
+                  <Text py="2">${product.price * product.quantity}</Text>
                   <Button
                     variant="solid"
                     colorScheme="red"
@@ -83,7 +91,7 @@ export const CheckOut = () => {
               </Stack>
             </Card>
           ))}
-        </Flex>
+        </SimpleGrid>
       </Flex>
       <Flex direction="column" gap="15px" alignItems="flex-start">
         <Heading>Contact information</Heading>

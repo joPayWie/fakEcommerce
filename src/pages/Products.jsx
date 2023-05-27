@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { SimpleGrid, Flex, Heading } from '@chakra-ui/react'
+import { SimpleGrid, Flex, Heading, Text } from '@chakra-ui/react'
 
 import { ProductCard } from '../components/ProductCard'
 import { SkeletonCard } from '../components/SkeletonCard'
@@ -54,10 +54,18 @@ export const Products = () => {
         </SimpleGrid>
       )}
       {products.length === 0 ? (
-        <Flex h="100%" w="100%" justify="center">
-          <Heading>
-            No products founded. Please change the filters and try again.
-          </Heading>
+        <Flex
+          flex="1"
+          h="100%"
+          w="100%"
+          direction="column"
+          align="center"
+          color="gray.600"
+          textAlign="center"
+          p={50}
+        >
+          <Heading>No products founded.</Heading>
+          <Text fontSize={25}>Please change the filters and try again.</Text>
         </Flex>
       ) : (
         <SimpleGrid

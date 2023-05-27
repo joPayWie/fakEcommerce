@@ -145,10 +145,10 @@ export const Nav = () => {
             overflowY="auto"
             flexDir="column"
           >
-            <Flex justify="flex-end">
+            <Flex justify="space-between">
+              <img src={logo} alt="Logo" style={{ maxHeight: '65px' }} />
               <IconButton
                 colorScheme="blue"
-                S
                 mt={2}
                 mr={2}
                 mb={2}

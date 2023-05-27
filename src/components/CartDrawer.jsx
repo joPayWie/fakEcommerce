@@ -66,7 +66,8 @@ export const CartDrawer = () => {
                 <Stack>
                   <CardBody>
                     <Heading size="sm">{product.name}</Heading>
-                    <Text py="2">${product.price}</Text>
+                    <Text>x {product.quantity}</Text>
+                    <Text py="2">${product.price * product.quantity}</Text>
                     <Button
                       variant="solid"
                       colorScheme="red"
@@ -80,7 +81,7 @@ export const CartDrawer = () => {
             ))}
           </DrawerBody>
 
-          <DrawerFooter pb={{ base: '50', md: '15px' }}>
+          <DrawerFooter pb={{ base: '20px', md: '15px' }}>
             <Button variant="outline" mr={3} onClick={resetCart}>
               Delete all
             </Button>

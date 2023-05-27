@@ -18,6 +18,7 @@ import {
   List,
   ListItem,
   useToast,
+  Input,
 } from '@chakra-ui/react'
 
 import { IoCart } from 'react-icons/io5'
@@ -31,6 +32,7 @@ export const ProductDetails = () => {
   const [selectedProduct, setSelectedProduct] = useState({})
   const [productCategories, setProductCategories] = useState([])
   const [skeleton, setSkeleton] = useState(true)
+  const [quantitySelected, setQuantitySelected] = useState(1)
   const { addToCart } = useCartContext()
 
   const param = useParams()
@@ -41,7 +43,7 @@ export const ProductDetails = () => {
     const getData = async () => {
       const product = await getOneProduct(param.productId)
       setSkeleton(false)
-      setSelectedProduct(product)
+      setSelectedProduct({ ...product, id: param.productId })
       setProductCategories(product.categories)
     }
     getData()
@@ -54,7 +56,7 @@ export const ProductDetails = () => {
       ) : (
         <Container maxW={'7xl'}>
           <SimpleGrid
-            columns={{ base: 1, lg: 2 }}
+            columns={{ base: 1, md: 2 }}
             spacing={{ base: 8, md: 10 }}
             py={{ base: 15, md: 20 }}
           >
@@ -119,7 +121,7 @@ export const ProductDetails = () => {
                     Categories
                   </Text>
 
-                  <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
+                  <SimpleGrid spacing={10}>
                     <List spacing={2}>
                       {productCategories.map((category) => (
                         <ListItem key={category}>{category}</ListItem>
@@ -127,6 +129,22 @@ export const ProductDetails = () => {
                     </List>
                   </SimpleGrid>
                 </Box>
+                <Stack>
+                  <Text
+                    fontSize={{ base: '16px', lg: '18px' }}
+                    color="blue.500"
+                    fontWeight={'500'}
+                    textTransform={'uppercase'}
+                    mb={'2'}
+                  >
+                    Quantity
+                  </Text>
+                  <Input
+                    type="number"
+                    value={quantitySelected}
+                    onChange={(e) => setQuantitySelected(e.target.value)}
+                  />
+                </Stack>
               </Stack>
               <Flex justifyContent={'center'}>
                 <Button
@@ -142,7 +160,7 @@ export const ProductDetails = () => {
                     boxShadow: 'lg',
                   }}
                   onClick={() => {
-                    addToCart(selectedProduct)
+                    addToCart(selectedProduct, quantitySelected)
                     toast({
                       title: 'Succesful!',
                       description: 'The product was successfully added to cart',

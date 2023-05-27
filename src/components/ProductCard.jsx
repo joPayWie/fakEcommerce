@@ -45,7 +45,7 @@ export const ProductCard = ({ product }) => {
         </Stack>
       </CardBody>
       <Divider borderColor={useColorModeValue('gray.300', 'gray.600')} />
-      <CardFooter>
+      <CardFooter justify="center">
         <ButtonGroup
           spacing="2"
           size={{ base: 'md' }}
