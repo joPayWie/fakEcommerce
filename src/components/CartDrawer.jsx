@@ -1,6 +1,5 @@
 import {
   Button,
-  Text,
   Drawer,
   DrawerBody,
   DrawerFooter,
@@ -8,25 +7,20 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
-  Card,
-  Image,
-  Stack,
-  CardBody,
-  Heading,
   useDisclosure,
   Flex,
 } from '@chakra-ui/react'
 
 import { NavLink } from 'react-router-dom'
 
-import { BsFillTrash3Fill } from 'react-icons/bs'
 import { IoCart } from 'react-icons/io5'
 
+import { LittleProductCard } from './LittleProductCard'
 import { useCartContext } from '../context/CartContext'
 
 export const CartDrawer = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const { cart, deleteItem, resetCart } = useCartContext()
+  const { cart, resetCart } = useCartContext()
 
   return (
     <>
@@ -55,34 +49,17 @@ export const CartDrawer = () => {
 
           <DrawerBody>
             {cart.map((product) => (
-              <Card
-                key={product.id}
-                direction={{ base: 'column', sm: 'row' }}
-                overflow="hidden"
-                variant="outline"
-              >
-                <Image maxH="50px" src={product.image} alt={product.name} />
-
-                <Stack>
-                  <CardBody>
-                    <Heading size="sm">{product.name}</Heading>
-                    <Text>x {product.quantity}</Text>
-                    <Text py="2">${product.price * product.quantity}</Text>
-                    <Button
-                      variant="solid"
-                      colorScheme="red"
-                      onClick={() => deleteItem(product.id)}
-                    >
-                      <BsFillTrash3Fill />
-                    </Button>
-                  </CardBody>
-                </Stack>
-              </Card>
+              <LittleProductCard key={product.id} product={product} />
             ))}
           </DrawerBody>
 
           <DrawerFooter pb={{ base: '20px', md: '15px' }}>
-            <Button variant="outline" mr={3} onClick={resetCart}>
+            <Button
+              colorScheme="red"
+              variant="outline"
+              mr={3}
+              onClick={resetCart}
+            >
               Delete all
             </Button>
             <Button

@@ -16,7 +16,6 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = (item, productQuantity = 1) => {
     const includedInCart = cart.find((product) => product.id === item.id)
-    console.log(item.id)
     if (includedInCart) {
       console.log(includedInCart)
       const newCart = cart.map((product) => {

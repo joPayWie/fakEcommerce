@@ -126,14 +126,18 @@ export const Nav = () => {
 
         {/* MOBILE */}
         <Box display={{ base: 'flex', md: 'none' }} fontWeight="semibold">
-          <IconButton
-            colorScheme="blue"
-            aria-label="Open Menu"
-            size="lg"
-            mr={2}
-            icon={<HamburgerIcon />}
-            onClick={() => changeBurgerDisplay('flex')}
-          />
+          <Flex align="center" gap="10px">
+            <CartDrawer />
+            <IconButton
+              colorScheme="blue"
+              aria-label="Open Menu"
+              size="lg"
+              mr={2}
+              icon={<HamburgerIcon />}
+              onClick={() => changeBurgerDisplay('flex')}
+            />
+          </Flex>
+
           <Flex
             w="100vw"
             display={burgerDisplay}
@@ -202,7 +206,7 @@ export const Nav = () => {
                     color: 'white',
                   }}
                   onClick={() => {
-                    handleLogout
+                    handleLogout()
                     changeBurgerDisplay('none')
                   }}
                 >
@@ -225,7 +229,6 @@ export const Nav = () => {
                   LOGIN
                 </Button>
               )}
-              <CartDrawer />
             </Flex>
           </Flex>
         </Box>

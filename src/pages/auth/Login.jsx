@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import {
@@ -6,16 +7,21 @@ import {
   Input,
   FormControl,
   FormErrorMessage,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
 } from '@chakra-ui/react'
 
 import { auth } from '../../firebase/config'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { Link, useNavigate } from 'react-router-dom'
 
+import { useUserContext } from '../../context/UserContext'
+
 import { GoogleBtn } from './components/GoogleBtn'
 
 import styles from './Auth.module.css'
-import { useUserContext } from '../../context/UserContext'
 
 export const Login = () => {
   const {
@@ -30,6 +36,8 @@ export const Login = () => {
 
   const pagesUserHasNavigate = window.history.state.idx
 
+  const [authError, setAuthError] = useState(false)
+
   const signIn = async (userValues) => {
     try {
       const userCredential = await signInWithEmailAndPassword(
@@ -42,9 +50,9 @@ export const Login = () => {
       {
         pagesUserHasNavigate === 0 ? navigate('/products') : navigate(-1)
       }
-    } catch (error) {
-      const errorCode = error.code
-      const errorMessage = error.message
+      setAuthError(false)
+    } catch (e) {
+      setAuthError(true)
     }
   }
   return (
@@ -93,6 +101,15 @@ export const Login = () => {
             <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
           </FormControl>
         </div>
+        {authError && (
+          <Alert status="error">
+            <AlertIcon />
+            <AlertTitle>Cannot sign in!</AlertTitle>
+            <AlertDescription fontWeight="500">
+              Wrong email or password.
+            </AlertDescription>
+          </Alert>
+        )}
         <Button
           type="submit"
           isLoading={isSubmitting}

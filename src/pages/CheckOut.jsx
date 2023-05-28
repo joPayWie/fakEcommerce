@@ -1,15 +1,16 @@
+import { useState } from 'react'
+
 import {
   Flex,
   Heading,
   Input,
   Button,
   FormControl,
-  Card,
-  Image,
-  Stack,
-  CardBody,
-  Text,
   SimpleGrid,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
 } from '@chakra-ui/react'
 
 import { useForm } from 'react-hook-form'
@@ -18,15 +19,17 @@ import { useNavigate } from 'react-router-dom'
 import { useCartContext } from '../context/CartContext'
 import { useUserContext } from '../context/UserContext'
 import { createOrder } from '../services/products'
-import { BsFillTrash3Fill } from 'react-icons/bs'
+import { LittleProductCard } from '../components/LittleProductCard'
 
 import bgImg from '../assets/bg3.jpg'
+
 import styles from './Pages.module.css'
 
 export const CheckOut = () => {
-  const { cart, calculateTotal, resetCart, deleteItem } = useCartContext()
+  const { cart, calculateTotal, resetCart } = useCartContext()
   const { loggedUser } = useUserContext()
   const navigate = useNavigate()
+  const [authError, setAuthError] = useState(false)
 
   const {
     register,
@@ -48,9 +51,8 @@ export const CheckOut = () => {
       })
       resetCart()
       navigate('/succesfulorder')
-    } catch (error) {
-      const errorCode = error.code
-      const errorMessage = error.message
+    } catch (e) {
+      setAuthError(true)
     }
   }
 
@@ -64,39 +66,29 @@ export const CheckOut = () => {
     >
       <Flex direction="column" gap="15px">
         <Heading>Your products</Heading>
-        <SimpleGrid columns={{ base: '2', md: '3' }} gap="10px">
-          {cart.map((product) => (
-            <Card
-              key={product.id}
-              direction={{ base: 'column', sm: 'row' }}
-              overflow="hidden"
-              variant="outline"
-              padding={2}
-            >
-              <Image maxH="50px" src={product.image} alt={product.name} />
 
-              <Stack>
-                <CardBody>
-                  <Heading size="sm">{product.name}</Heading>
-                  <Text py="2">x{product.quantity}</Text>
-                  <Text py="2">${product.price * product.quantity}</Text>
-                  <Button
-                    variant="solid"
-                    colorScheme="red"
-                    onClick={() => deleteItem(product.id)}
-                  >
-                    <BsFillTrash3Fill />
-                  </Button>
-                </CardBody>
-              </Stack>
-            </Card>
-          ))}
-        </SimpleGrid>
+        {cart.length === 0 ? (
+          <Flex
+            rounded="md"
+            p={3}
+            fontSize={20}
+            textAlign="center"
+            className={styles.glass}
+          >
+            Oops! It seems that there are no products in your cart.
+          </Flex>
+        ) : (
+          <SimpleGrid columns={{ base: '2', md: '3' }} gap="10px">
+            {cart.map((product) => (
+              <LittleProductCard key={product.id} product={product} />
+            ))}
+          </SimpleGrid>
+        )}
       </Flex>
       <Flex direction="column" gap="15px" alignItems="flex-start">
         <Heading>Contact information</Heading>
         <form
-          className={styles.checkoutForm}
+          className={`${styles.glass} ${styles.checkoutForm}`}
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -141,6 +133,15 @@ export const CheckOut = () => {
             <Heading size="md">Total:</Heading>
             <Heading size="lg">${calculateTotal()}</Heading>
           </Flex>
+          {authError && (
+            <Alert status="error">
+              <AlertIcon />
+              <AlertTitle>Your order could not be fulfilled </AlertTitle>
+              <AlertDescription fontWeight="500">
+                Please try again.
+              </AlertDescription>
+            </Alert>
+          )}
           <Button colorScheme="green" type="submit" isLoading={isSubmitting}>
             Place order
           </Button>
