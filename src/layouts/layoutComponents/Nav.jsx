@@ -12,6 +12,7 @@ import {
   IconButton,
   Flex,
   Box,
+  Image,
 } from '@chakra-ui/react'
 
 import { NavLink } from 'react-router-dom'
@@ -32,11 +33,13 @@ export const Nav = () => {
   return (
     <>
       <nav className={styles.navBar}>
-        <img
-          src={logo}
-          alt="Logo"
-          style={{ maxHeight: '100%', marginLeft: '1rem' }}
-        />
+        <NavLink to="/">
+          <Image
+            src={logo}
+            alt="Logo"
+            style={{ maxHeight: '15vh', marginLeft: '1rem' }}
+          />
+        </NavLink>
 
         {/* DESKTOP */}
         <HStack
@@ -150,7 +153,9 @@ export const Nav = () => {
             flexDir="column"
           >
             <Flex justify="space-between">
-              <img src={logo} alt="Logo" style={{ maxHeight: '65px' }} />
+              <NavLink to="/">
+                <img src={logo} alt="Logo" style={{ maxHeight: '65px' }} />
+              </NavLink>
               <IconButton
                 colorScheme="blue"
                 mt={2}

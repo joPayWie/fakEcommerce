@@ -29,12 +29,14 @@ export const ProductCard = ({ product }) => {
     <Card m="3">
       <CardBody>
         <Box maxW={{ base: '100%', md: '92.5%' }}>
-          <Image
-            src={image}
-            alt={name}
-            borderRadius="lg"
-            style={{ objectFit: 'cover' }}
-          />
+          <Link to={id}>
+            <Image
+              src={image}
+              alt={name}
+              borderRadius="lg"
+              style={{ objectFit: 'cover' }}
+            />
+          </Link>
         </Box>
         <Stack mt="6" spacing="3">
           <Heading size="md">{name}</Heading>

@@ -57,12 +57,12 @@ export const CheckOut = () => {
   }
 
   return (
-    <Flex
-      justify="space-around"
+    <SimpleGrid
+      columns={{ base: '1', lg: '2' }}
       p={5}
       bgImage={bgImg}
       bgSize="cover"
-      direction={{ base: 'column', lg: 'row' }}
+      gap="25px"
     >
       <Flex direction="column" gap="15px">
         <Heading>Your products</Heading>
@@ -78,7 +78,7 @@ export const CheckOut = () => {
             Oops! It seems that there are no products in your cart.
           </Flex>
         ) : (
-          <SimpleGrid columns={{ base: '2', md: '3' }} gap="10px">
+          <SimpleGrid columns={{ base: '1', md: '2' }}>
             {cart.map((product) => (
               <LittleProductCard key={product.id} product={product} />
             ))}
@@ -147,6 +147,6 @@ export const CheckOut = () => {
           </Button>
         </form>
       </Flex>
-    </Flex>
+    </SimpleGrid>
   )
 }

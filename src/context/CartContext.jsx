@@ -14,10 +14,16 @@ export const CartProvider = ({ children }) => {
     )
   }
 
+  const deleteItem = (id) => {
+    const currentCart = getLocalStorage('cart')
+    const filteredCart = currentCart.filter((item) => item.id !== id)
+    setCart(filteredCart)
+    setLocalStorage('cart', filteredCart)
+  }
+
   const addToCart = (item, productQuantity = 1) => {
     const includedInCart = cart.find((product) => product.id === item.id)
     if (includedInCart) {
-      console.log(includedInCart)
       const newCart = cart.map((product) => {
         if (product.id === item.id) {
           return {
@@ -34,13 +40,6 @@ export const CartProvider = ({ children }) => {
       setCart(newCart)
       setLocalStorage('cart', newCart)
     }
-  }
-
-  const deleteItem = (id) => {
-    const currentCart = getLocalStorage('cart')
-    const filteredCart = currentCart.filter((item) => item.id !== id)
-    setCart(filteredCart)
-    setLocalStorage('cart', filteredCart)
   }
 
   const resetCart = () => {
