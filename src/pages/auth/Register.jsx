@@ -1,21 +1,29 @@
+import { useState } from 'react'
+
 import {
   Flex,
   FormControl,
   Input,
   FormErrorMessage,
   Button,
+  Heading,
+  Text,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
 } from '@chakra-ui/react'
 
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { auth } from '../../firebase/config'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 
 import { useUserContext } from '../../context/UserContext'
-import { GoogleBtn } from './components/GoogleBtn'
 
 import styles from './Auth.module.css'
+import { AiOutlineArrowLeft } from 'react-icons/ai'
 
 export const Register = () => {
   const {
@@ -23,9 +31,14 @@ export const Register = () => {
     handleSubmit,
     formState: { errors, isDirty, isSubmitting },
   } = useForm()
+
   const { handleLogin } = useUserContext()
 
   const navigate = useNavigate()
+
+  const [authError, setAuthError] = useState(false)
+
+  const pagesUserHasNavigate = window.history.state.idx
 
   const createNewAccount = async (userValues) => {
     try {
@@ -36,13 +49,12 @@ export const Register = () => {
       )
       const user = userCredential.user
       handleLogin({ email: user.email, uid: user.uid })
-      navigate(-1)
+      {
+        pagesUserHasNavigate < 2 ? navigate('/products') : navigate(-2)
+      }
+      setAuthError(false)
     } catch (error) {
-      // mostrarle error al user!!
-      const errorCode = error.code
-      console.log(errorCode)
-      const errorMessage = error.message
-      console.log(errorMessage)
+      setAuthError(true)
     }
   }
 
@@ -60,7 +72,11 @@ export const Register = () => {
         onSubmit={handleSubmit(createNewAccount)}
         className={styles.authForm}
       >
-        <GoogleBtn navigate={navigate} />
+        <Heading>Welcome there!</Heading>
+        <Text textAlign="center">
+          Enter your email and password
+          <Text fontWeight="400">(minimum 6 characters)</Text>
+        </Text>
         <FormControl isInvalid={errors.email}>
           <label>Email</label>
           <Input
@@ -92,6 +108,15 @@ export const Register = () => {
             <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
           </FormControl>
         </div>
+        {authError && (
+          <Alert status="error">
+            <AlertIcon />
+            <AlertTitle>Cannot register!</AlertTitle>
+            <AlertDescription fontWeight="500">
+              Invalid email or password.
+            </AlertDescription>
+          </Alert>
+        )}
         <Button
           type="submit"
           isLoading={isSubmitting}
@@ -99,6 +124,10 @@ export const Register = () => {
           isDisabled={!isDirty}
         >
           Register
+        </Button>
+        <Button as={Link} to="/login" colorScheme="blackAlpha" color="white">
+          <AiOutlineArrowLeft />
+          <Text ml={3}>Back</Text>
         </Button>
       </form>
     </Flex>

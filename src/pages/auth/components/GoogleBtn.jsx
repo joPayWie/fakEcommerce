@@ -25,11 +25,8 @@ export const GoogleBtn = ({ navigate, handleLogin }) => {
           pagesUserHasNavigate < 2 ? navigate('/products') : navigate(-2)
         }
       })
-      .catch((error) => {
+      .catch(() => {
         setIsLoading(false)
-        const errorCode = error.code
-        const errorMessage = error.message
-        const email = error.customData.email
       })
   }
 
