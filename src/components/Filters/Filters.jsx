@@ -5,7 +5,12 @@ import { Button, Input, Select } from '@chakra-ui/react'
 
 import styles from './Filters.module.css'
 
-export const Filters = ({ products, handleProducts, originalProducts }) => {
+export const Filters = ({
+  products,
+  handleProducts,
+  originalProducts,
+  setNoProductsToShow,
+}) => {
   const [currentCategories, setCurrentCategories] = useState([])
   const [name, setName] = useState('')
   const [category, setCategory] = useState('')
@@ -39,6 +44,11 @@ export const Filters = ({ products, handleProducts, originalProducts }) => {
       productsToFilter = productsToFilter.filter((product) => {
         return product.price <= maxPrice
       })
+    }
+    if (productsToFilter.length === 0) {
+      setNoProductsToShow(true)
+    } else {
+      setNoProductsToShow(false)
     }
     return handleProducts(productsToFilter)
   }

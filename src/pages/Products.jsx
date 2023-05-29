@@ -12,6 +12,7 @@ export const Products = () => {
   const [originalProducts, setOriginalProducts] = useState([])
   const [products, setProducts] = useState([])
   const [skeleton, setSkeleton] = useState(true)
+  const [noProductsToShow, setNoProductsToShow] = useState(false)
 
   useEffect(() => {
     const getData = async () => {
@@ -33,6 +34,8 @@ export const Products = () => {
         products={products}
         handleProducts={handleProducts}
         originalProducts={originalProducts}
+        noProductsToShow={noProductsToShow}
+        setNoProductsToShow={setNoProductsToShow}
       />
 
       {skeleton && (
@@ -53,7 +56,7 @@ export const Products = () => {
           <SkeletonCard />
         </SimpleGrid>
       )}
-      {products.length === 0 ? (
+      {noProductsToShow ? (
         <Flex
           flex="1"
           h="100%"
