@@ -4,8 +4,6 @@ import { onAuthStateChanged, signOut } from 'firebase/auth'
 
 import { auth } from '../firebase/config'
 
-// SPINNER PARA CHEQUEAR QUE HAYA USUARIO ISLOADING
-
 export const UserContext = createContext()
 
 export const UserProvider = ({ children }) => {

@@ -21,7 +21,7 @@ import { HiUserCircle } from 'react-icons/hi'
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons'
 
 import { useUserContext } from '../../context/UserContext'
-import { CartDrawer } from '../../components/CartDrawer'
+import { CartDrawer } from '../../components/Cart/CartDrawer'
 
 import logo from '../../../src/assets/logo.png'
 import styles from './Nav.module.css'
@@ -47,8 +47,7 @@ export const Nav = () => {
           as="nav"
           gap="5%"
           fontWeight="semibold"
-          px="4rem"
-          mr="1rem"
+          px="3rem"
         >
           <Link
             as={NavLink}

@@ -9,14 +9,17 @@ import {
   DrawerCloseButton,
   useDisclosure,
   Flex,
+  Text,
 } from '@chakra-ui/react'
 
 import { NavLink } from 'react-router-dom'
 
 import { IoCart } from 'react-icons/io5'
 
-import { LittleProductCard } from './LittleProductCard'
-import { useCartContext } from '../context/CartContext'
+import { LittleProductCard } from '../LittleProductCard'
+import { useCartContext } from '../../context/CartContext'
+
+import styles from './Cart.module.css'
 
 export const CartDrawer = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -39,7 +42,8 @@ export const CartDrawer = () => {
         onClick={onOpen}
         aria-label="Cart"
       >
-        <IoCart size={30} />
+        <IoCart className={styles.cartIcon} />
+        <Text>({cart.length})</Text>
       </Flex>
       <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
         <DrawerOverlay />
