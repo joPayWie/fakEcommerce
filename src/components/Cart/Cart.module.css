@@ -1,9 +1,9 @@
 .cartIcon {
-  font-size: 85px;
+  font-size: 80px;
 }
 
 @media (max-width: 768px) {
   .cartIcon {
-    font-size: 37.5px;
+    font-size: 27.5px;
   }
 }

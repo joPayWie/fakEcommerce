@@ -19,6 +19,7 @@ import { IoCart } from 'react-icons/io5'
 import { LittleProductCard } from '../LittleProductCard'
 import { useCartContext } from '../../context/CartContext'
 
+import bgImg from '../../assets/bg3.jpg'
 import styles from './Cart.module.css'
 
 export const CartDrawer = () => {
@@ -49,15 +50,15 @@ export const CartDrawer = () => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>Your cart</DrawerHeader>
+          <DrawerHeader bgColor="#e7f5f8">Your cart</DrawerHeader>
 
-          <DrawerBody>
+          <DrawerBody bgImage={bgImg} bgSize="cover">
             {cart.map((product) => (
               <LittleProductCard key={product.id} product={product} />
             ))}
           </DrawerBody>
 
-          <DrawerFooter pb={{ base: '20px', md: '15px' }}>
+          <DrawerFooter pb={{ base: '20px', md: '15px' }} bgColor="#e7f5f8">
             <Button
               colorScheme="red"
               variant="outline"

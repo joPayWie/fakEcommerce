@@ -11,6 +11,8 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
+  InputGroup,
+  IconButton,
 } from '@chakra-ui/react'
 
 import { auth } from '../../firebase/config'
@@ -22,6 +24,7 @@ import { useUserContext } from '../../context/UserContext'
 import { GoogleBtn } from './components/GoogleBtn'
 
 import styles from './Auth.module.css'
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 
 export const Login = () => {
   const {
@@ -30,13 +33,17 @@ export const Login = () => {
     formState: { errors, isDirty, isSubmitting },
   } = useForm()
 
-  const navigate = useNavigate()
-
   const { handleLogin } = useUserContext()
 
-  const pagesUserHasNavigate = window.history.state.idx
+  const navigate = useNavigate()
 
   const [authError, setAuthError] = useState(false)
+
+  const [show, setShow] = useState(false)
+
+  const handleClick = () => setShow(!show)
+
+  const pagesUserHasNavigate = window.history.state.idx
 
   const signIn = async (userValues) => {
     try {
@@ -87,17 +94,24 @@ export const Login = () => {
         <div>
           <FormControl isInvalid={errors.password}>
             <label>Password</label>
-            <Input
-              bgColor="white"
-              type="password"
-              {...register('password', {
-                required: 'Please complete this field',
-                minLength: {
-                  value: 6,
-                  message: 'Please enter a password with 6 characters',
-                },
-              })}
-            />
+            <InputGroup alignItems="center">
+              <Input
+                bgColor="white"
+                type={show ? 'text' : 'password'}
+                {...register('password', {
+                  required: 'Please complete this field',
+                  minLength: {
+                    value: 6,
+                    message: 'Please enter a password with 6 characters',
+                  },
+                })}
+              />
+              <IconButton
+                size="md"
+                onClick={handleClick}
+                icon={show ? <AiFillEyeInvisible /> : <AiFillEye />}
+              />
+            </InputGroup>
             <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
           </FormControl>
         </div>
