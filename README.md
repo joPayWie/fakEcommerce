@@ -8,7 +8,7 @@ It is a e-commerce which offers differents types of products for babies, toddler
 
 It includes three pages (Home, Products and Login/Register), which you can navegate using the navbar. 
 
-![Products](/public/readmeImages/products.png)
+![Products](/public/readmeImages/productsPage.png)
 
 In the products section, you filter the products by name, by máx price and by category. 
 
@@ -24,13 +24,13 @@ You can check the product you've added on your cart, and add extra units of the 
 
 When you click checkout, it can send you either to the checkout page, or if you aren't logged in by then, direct you to the login page.
 
-![Checkout](/public/readmeImages/checkout.png)
+![Checkout](/public/readmeImages/checkoutPage.png)
 
-![Login](/public/readmeImages/login.png)
+![Login](/public/readmeImages/loginPage.png)
 
 Users can login using their Google account or by other mail domain. 
 
-![Register](/public/readmeImages/register.png)
+![Register](/public/readmeImages/registerPage.png)
 
 It uses Firebase as database, both for products and for the orders created.
 
