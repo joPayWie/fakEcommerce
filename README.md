@@ -1,6 +1,6 @@
 # This is R💙A💚I💛N🧡B❤️O💜W - fakE-commerce
 
-[Check the deploy](https://www.example.com](https://fak-ecommerce.vercel.app/)
+[Check the deploy](https://fak-ecommerce.vercel.app/)
 
 It is a e-commerce which offers differents types of products for babies, toddlers and children.
 
@@ -40,6 +40,6 @@ The site is 100% responsive.
 - React with [Vite](https://vitejs.dev/guide/)
 - [Chakra](https://chakra-ui.com/)
 
-[Check the deploy](https://www.example.com](https://fak-ecommerce.vercel.app/)
+[Check the deploy](https://fak-ecommerce.vercel.app/)
 
 ## Thank you for reading 💜
