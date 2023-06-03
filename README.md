@@ -32,13 +32,12 @@ Users can login using their Google account or by other mail domain.
 
 ![Register](/public/readmeImages/registerPage.png)
 
-It uses Firebase as database, both for products and for the orders created.
-
-The site is 100% responsive.
+### The site is 100% responsive.
 
 ## 🛠️ Build entirely with:
 - React with [Vite](https://vitejs.dev/guide/)
 - [Chakra](https://chakra-ui.com/)
+- [Firebase](https://firebase.google.com/?hl=es-419) � as database, both for products and for the orders created.
 
 [Check the deploy](https://fak-ecommerce.vercel.app/)
 
